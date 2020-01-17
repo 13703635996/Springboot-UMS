@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lei.common.mapper.LibSeatMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="WebMap" type="com.lei.common.entity.LibSeat">
+        <id column="p_id" property="p_id"/>
+        <result column="p_number" property="p_number"/>
+        <result column="p_user" property="p_user"/>
+        <result column="p_begin" property="p_begin"/>
+        <result column="p_end" property="p_end"/>
+        <result column="p_position" property="p_position"/>
+        <result column="p_floor" property="p_floor"/>
+    </resultMap>
+    <select id="getAllSeat" resultMap="WebMap" parameterType="java.lang.Integer">
+        SELECT * FROM lib_seat where p_floor=#{floor} LIMIT #{number},10;
+    </select>
+    <select id="searchSeat" resultMap="WebMap">
+        SELECT * FROM lib_seat l WHERE p_floor=#{floor} AND MOD(p_id,2)=#{parity} LIMIT #{number},10;
+    </select>
+
+</mapper>
