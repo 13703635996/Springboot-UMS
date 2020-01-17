@@ -17,5 +17,23 @@
     <select id="searchSeat" resultMap="WebMap">
         SELECT * FROM lib_seat l WHERE p_floor=#{floor} AND MOD(p_id,2)=#{parity} LIMIT #{number},10;
     </select>
+    <update id="selectSeat">
+        UPDATE
+          lib_seat
+        SET
+          `p_user` = #{user},
+          `p_begin` = #{begin},
+          `p_end` = #{end}
+        WHERE `p_id` = #{id} ;
+    </update>
+    <update id="releaseSeat">
+        UPDATE
+          `my_interface`.`lib_seat`
+        SET
+          `p_user` = 0,
+          `p_begin` = 0,
+          `p_end` = 0
+        WHERE TIME_TO_SEC(p_end) &lt; TIME_TO_SEC(#{nowTime})
+    </update>
 
 </mapper>

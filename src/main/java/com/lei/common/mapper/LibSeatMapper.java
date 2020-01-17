@@ -12,4 +12,9 @@ public interface LibSeatMapper {
     List<LibSeat> getAllSeat(Integer floor,Integer number);
 
     List<LibSeat> searchSeat(Integer floor, Integer parity, Integer number);
+
+    boolean selectSeat(Integer id, String user, String begin, String end);
+
+    void releaseSeat(String nowTime);
+
 }
